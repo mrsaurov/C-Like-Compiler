@@ -63,7 +63,7 @@ print b;
 
 	```bash
 	git clone
-	cd ./ClikeCompiler
+	cd ./C-Like-Compiler
 	```
 
 * Generate parser (``parser.tab.c``) and header file (``parser.tab.h``)
