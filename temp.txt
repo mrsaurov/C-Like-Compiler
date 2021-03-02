@@ -1,0 +1,46 @@
+exp:  ID  
+	  {
+		  int address = id_check($1->st_name);
+			  
+			  if(address!=-1)
+				  gen_code(LD_VAR, address);
+			  else 
+			  	exit(1);
+	  }
+	| ICONST { gen_code(LD_INT, $1); }			  
+	| exp ADDOP exp { gen_code(ADD, -1); } 		  
+	| exp SUBOP exp { gen_code(SUB, -1);}		  
+	| exp MULOP exp { gen_code(MUL,-1);}		  
+	| exp DIVOP exp { gen_code(DIV,-1);}		  
+	| exp EQUOP exp { gen_code(EQ, -1);}		  
+	| exp GT exp {gen_code(GTN, -1);}	  	  
+	| exp LT exp {gen_code(LTN, -1);}  	  
+	| LPAREN exp RPAREN
+	;
+
+%left ADDOP SUBOP
+%left MULOP DIVOP
+
+ICONST    "0"|[0-9]{digit}*
+
+if_statement: IF LPAREN exp RPAREN {gen_code(JMP_FALSE, 1);} LBRACE statements RBRACE {gen_code(GOTO, 2);} ELSE {gen_code(LABEL,1);} LBRACE statements RBRACE {gen_code(LABEL,2);};
+
+declaration:  INT ID SEMI
+			  {
+				  insert($2->st_name, strlen($2->st_name), INT_TYPE);
+			  }
+			  | INT ID ASSIGN ICONST SEMI
+			  {
+				  insert($2->st_name, strlen($2->st_name), INT_TYPE);
+				  gen_code(LD_INT_VALUE, $4);
+				  list_t* id = search($2->st_name);
+				  gen_code(STORE, id->address);
+			  }
+
+exp: SUBOP ICONST { gen_code(LD_INT, $2*-1); }		
+
+case WRITE_NEWLN:
+							printf("addi $a0, $0, 0xA\n");				
+							printf("addi $v0, $0, 0xB\n");
+							printf("syscall\n");
+							break;

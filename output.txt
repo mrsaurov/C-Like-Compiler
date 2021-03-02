@@ -1,0 +1,62 @@
+Comment at line 1
+Comment at line 2
+Comment at line 3
+inserting i in symtab and its address = 0
+inserting b in symtab and its address = 1
+Comment at line 22
+Comment at line 23
+Comment at line 25
+Comment at line 26
+Comment at line 27
+Comment at line 28
+Comment at line 30
+Comment at line 34
+Comment at line 35
+Comment at line 36
+Comment at line 37
+Comment at line 38
+Comment at line 40
+Comment at line 41
+Comment at line 42
+Comment at line 43
+Comment at line 44
+Comment at line 45
+Comment at line 46
+Comment at line 47
+Parsing finished!
+
+
+================STACK MACHINE INSTRUCTIONS================
+  0: start              -1
+  1: ld_int              0
+  2: store               0
+  3: write_int           0
+  4: ld_int              6
+  5: store               1
+  6: ld_int              0
+  7: store               0
+  8: label               8
+  9: ld_var              0
+ 10: ld_int             20
+ 11: lt                 -1
+ 12: jmp_false           6
+ 13: goto                9
+ 14: label               7
+ 15: ld_var              0
+ 16: ld_int              1
+ 17: add                -1
+ 18: store               0
+ 19: goto                8
+ 20: label               9
+ 21: ld_var              1
+ 22: ld_int              1
+ 23: add                -1
+ 24: store               1
+ 25: goto                7
+ 26: label               6
+ 27: write_int           1
+ 28: halt               -1
+
+
+================MIPS assembly================
+Assembly code written to assembly.s file
